@@ -1,0 +1,28 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/orders.css' %}">
+{% endblock %}
+{% block content %}
+<section class="orders-section">
+    <h2>Обновление статуса заказа</h2>
+    <div class="order-item">
+        <p>Уникальный номер заказа: {{ order.id }}</p>
+        <p>Имя: {{ order.customer_first_name }} {{ order.customer_last_name }}</p>
+        <p>Почта: {{ order.customer_email }}</p>
+        <p>Адрес доставки: {{ order.shipping_address }}</p>
+        <p>Поштомат/Відділення: {{ order.post_office_number }}</p>
+        <p>Поштовий індекс: {{ order.postal_code }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <label for="status">Статус заказа:</label>
+            <select id="status" name="status">
+                <option value="оплачен" {% if order.status == "оплачен" %}selected{% endif %}>Оплачен</option>
+                <option value="доставляется" {% if order.status == "доставляется" %}selected{% endif %}>Доставляется</option>
+                <option value="доставлен" {% if order.status == "доставлен" %}selected{% endif %}>Доставлен</option>
+            </select>
+            <button type="submit">Обновить статус</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

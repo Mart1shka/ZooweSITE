@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/reg.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="register-section">
+    <h2>Register</h2>
+    <form class="register-form" method="post">  <!-- Обязательно метод POST -->
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="name">Name</label>
+        <input type="name" id="email" name="name" required>
+
+        <label for="surname">Surname</label>
+        <input type="surname" id="email" name="surname" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+
+        <button type="submit">Register</button>
+        <p>Already have an account? <a href="{% url 'login' %}" class="login-btn">Login</a></p>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="alert {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</section>
+{% endblock %}

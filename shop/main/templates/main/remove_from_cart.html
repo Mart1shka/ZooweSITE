@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/remove_from_cart.css' %}">
+{% endblock %}
+{% block content %}
+<div class="delete-confirmation">
+    <h2>Удалить товар из корзины</h2>
+    <p>Вы уверены, что хотите удалить "{{ cart_item.product.name }}" из корзины?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Да, удалить</button>
+        <a href="{% url 'cart' %}">Отмена</a>
+    </form>
+</div>
+{% endblock %}

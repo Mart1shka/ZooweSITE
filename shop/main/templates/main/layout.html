@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <div class="left-section">
+            <div class="logo">MyStore</div>
+            <nav>
+                <ul class="left-nav">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'product' %}">Products</a></li>
+                    <li><a href="{% url 'home' %}">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <nav>
+            <ul class="right-nav">
+                <li><a href="{% url 'create_product' %}" class="add", id="add">Add</a></li>
+                <li><a href="{% url 'cart' %}" class="cart", id="cart1">Cart</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'profile' %}" class="profile" id="log1">Profile</a></li>
+                    <li><a href="{% url 'logout' %}" class="profile" id="log1">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="profile" id="log1">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}   
+    </main>
+
+    <footer>
+        <p>&copy; 2023 MyStore. All rights reserved.</p>
+    </footer>
+    {% block script %}
+    {% endblock %}
+</body>
+</html>

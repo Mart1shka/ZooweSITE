@@ -1,0 +1,31 @@
+
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="login-section">
+    <h2>Login</h2>
+    <form class="login-form" method="post">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <label for="remember_me">Запомнить меня</label>
+        <input type="checkbox" id="remember_me" name="remember_me">
+        <button type="submit">Login</button>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li class="alert {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</section>
+{% endblock %}

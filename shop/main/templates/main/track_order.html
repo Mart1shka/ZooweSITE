@@ -1,0 +1,28 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/track_order.css' %}">
+{% endblock %}
+{% block content %}
+<div class="order-tracking">
+    <h2>Отслеживание заказа</h2>
+    <p>Заказ №{{ order.order_number }}</p>
+    <h3>Детали заказа:</h3>
+    <ul>
+        {% for item in order.items.all %}
+        <li>
+            <div class="product-image">
+                <img src="{{ item.product.image1.url }}" alt="{{ item.product.name }}">
+            </div>
+            <div class="product-details">
+                <p class="product-name">{{ item.product.name }}</p>
+                <p class="product-quantity">Количество: {{ item.quantity }}</p>
+                <p class="product-price">Цена: {{ item.product.price }} {{ item.product.currency }}</p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <p>Дата заказа: {{ order.order_date }}</p>
+    <p>Статус: {{ order.status }}</p>
+</div>
+{% endblock %}

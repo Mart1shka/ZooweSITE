@@ -1,0 +1,24 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/my_products.css' %}">
+{% endblock %}
+{% block content %}
+<div class="product-list">
+    <h2>Мои товары</h2>
+    {% for product in products %}
+    <div class="product">
+        {% if product.image1 %}
+        <img src="{{ product.image1.url }}" alt="{{ product.name }}">
+        {% else %}
+        <p>No image available</p>
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>{{ product.price }} {{ product.currency }}</p>
+        <a href="{% url 'edit_product' product.id %}" class="edit-button">Редактировать</a>
+        <a href="{% url 'delete_product' product.id %}" class="delete-button">Удалить</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

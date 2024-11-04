@@ -1,0 +1,57 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/create_product.css' %}">
+{% endblock %}
+{% block content %}
+<div class="product-form-container">
+    <h2>Добавить товар</h2>
+    <form action="{% url 'create_product' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="product-images">Изображения товара (до 8):</label>
+            <input type="file" id="product-images" name="images" multiple required>
+        </div>
+        <div class="form-group">
+            <label for="product-name">Название товара:</label>
+            <input type="text" id="product-name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="product-description">Описание товара:</label>
+            <textarea id="product-description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="product-price">Цена товара:</label>
+            <input type="number" id="product-price" name="price" required>
+        </div>
+        <div class="form-group">
+            <label for="currency">Валюта:</label>
+            <select id="currency" name="currency" required>
+                <option value="UAH">Грн</option>
+                <option value="USD">Доллары</option>
+                <option value="EUR">Евро</option>
+                <option value="PLN">Злоты</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="product-quantity">Количество товара:</label>
+            <input type="number" id="product-quantity" name="quantity" min="1" required>
+        </div>
+        <button type="submit">Добавить</button>
+    </form>
+    {% if form.errors %}
+    <div class="error-messages">
+        <ul>
+            {% for field in form %}
+            {% for error in field.errors %}
+            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+            {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

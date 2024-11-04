@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    padding-left: 20px; /* Добавляем отступ слева */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.left-nav {
+    margin-right: auto;
+}
+
+.right-nav {
+    margin-left: auto;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #444;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+main {
+    flex: 1; /* Расширяем main, чтобы занять всю доступную высоту */
+}
+
+.orders-section {
+    padding: 20px;
+}
+
+.order-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.order-item p {
+    margin: 5px 0;
+}
+
+.order-item select {
+    margin-right: 10px;
+}
+
+.order-item button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.order-item button:hover {
+    background-color: #45a049;
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+#log1 {
+    background-color: cornflowerblue;
+}
+
+#cart1 {
+    background-color: #28a745;
+}
+

@@ -1,0 +1,175 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    padding-left: 20px; /* Добавляем отступ слева */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.left-nav {
+    margin-right: auto;
+}
+
+.right-nav {
+    margin-left: auto;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #444;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+main {
+    flex: 1; /* Расширяем main, чтобы занять всю доступную высоту */
+}
+
+.orders-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-item {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-item p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.order-item .order-number {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4CAF50;
+    display: flex;
+    align-items: center;
+}
+
+.order-item .btn-copy {
+    margin-left: 10px;
+    background-color: #2196F3;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.order-item .btn-copy:hover {
+    background-color: #1976D2;
+}
+
+.order-item button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-item .btn-paid {
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 5px;
+}
+
+.order-item .btn-paid:hover {
+    background-color: #45a049;
+}
+
+.order-item .btn-shipped {
+    background-color: #FF9800;
+    color: white;
+    margin-right: 5px;
+}
+
+.order-item .btn-shipped:hover {
+    background-color: #FB8C00;
+}
+
+.order-item .btn-delivered {
+    background-color: #2196F3;
+    color: white;
+}
+
+.order-item .btn-delivered:hover {
+    background-color: #1E88E5;
+}
+
+.no-orders {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+#log1 {
+    background-color: cornflowerblue;
+}
+
+#cart1 {
+    background-color: #28a745;
+}
+

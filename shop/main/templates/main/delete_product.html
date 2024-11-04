@@ -1,0 +1,17 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/delete_product.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Удалить товар</h2>
+    <p>Вы уверены, что хотите удалить товар "{{ product.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+        <a href="{% url 'my_products' %}">Отмена</a>
+    </form>
+</div>
+{% endblock %}

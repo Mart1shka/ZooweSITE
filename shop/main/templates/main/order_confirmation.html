@@ -1,0 +1,19 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/order_confirmation.css' %}">
+{% endblock %}
+{% block content %}
+<div class="confirmation-section">
+    <h2>Подтверждение заказа</h2>
+    <p>Спасибо за ваш заказ! Ваш номер заказа: {{ order.order_number }}</p>  <!-- Используем номер заказа -->
+    <h3>Детали заказа:</h3>
+    <ul>
+        {% for item in order.items.all %}
+        <li>{{ item.quantity }} x {{ item.product.name }} - {{ item.product.price }} {{ item.product.currency }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Итоговая сумма: {{ total_price }} {{ order.items.first.product.currency }}</h3>
+    <a href="{% url 'home' %}" class="home-button">Вернуться на главную</a>
+</div>
+{% endblock %}

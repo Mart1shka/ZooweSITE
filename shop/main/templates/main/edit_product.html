@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/edit_product.css' %}">
+{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h2>Редактировать товар</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group">
+            <label for="quantity">Количество товара:</label>
+            <input type="number" id="quantity" name="quantity" value="{{ product.quantity }}" min="0">
+        </div>
+        {% for i in image_range %}
+            <label for="image{{ i }}">Изображение {{ i }}:</label>
+            <input type="file" name="images" id="image{{ i }}">
+            {% with image=images.i %}
+            {% if image and image.name %}
+            <div class="image-container">
+                <img src="{{ image.url }}" alt="{{ product.name }}">
+                <a href="{% url 'delete_image' product.id i %}" class="delete-image">Удалить изображение {{ i }}</a>
+            </div>
+            {% else %}
+            <p>No file chosen for Image {{ i }}</p>
+            {% endif %}
+            {% endwith %}
+        {% endfor %}
+        <button type="submit">Сохранить изменения</button>
+    </form>
+</div>
+{% endblock %}

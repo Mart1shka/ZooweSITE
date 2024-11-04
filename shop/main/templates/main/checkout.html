@@ -1,0 +1,96 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/checkout.css' %}">
+{% endblock %}
+{% block content %}
+<div class="checkout-section">
+    <h2>Оформление заказа</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="first_name">Имя:</label>
+            <input type="text" id="first_name" name="first_name" required>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Фамилия:</label>
+            <input type="text" id="last_name" name="last_name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="delivery_service">Служба доставки:</label>
+            <select id="delivery_service" name="delivery_service" required>
+                <option value="novaposhta">Новая почта</option>
+                <option value="ukrposhta">Укр почта</option>
+                <option value="meest">Meest</option>
+                <option value="instore">В магазин</option>
+            </select>
+        </div>
+        <div class="form-group" id="delivery_type_group" style="display: none;">
+            <label for="delivery_type">Тип доставки:</label>
+            <select id="delivery_type" name="delivery_type">
+                <option value="courier">Курьером</option>
+                <option value="branch">В отделение</option>
+                <option value="postamat">В почтомат</option>
+            </select>
+        </div>
+        <div class="form-group" id="branch_number_group" style="display: none;">
+            <label for="branch_number">Номер отделения (1, 2, 3):</label>
+            <input type="number" id="branch_number" name="branch_number">
+        </div>
+        <div class="form-group" id="postal_index_group" style="display: none;">
+            <label for="postal_index">Почтовый индекс:</label>
+            <input type="text" id="postal_index" name="postal_index">
+        </div>
+        <div class="form-group" id="store_number_group" style="display: none;">
+            <label for="store_number">Номер магазина:</label>
+            <input type="text" id="store_number" name="store_number">
+        </div>
+        <div class="form-group" id="address_group" style="display: none;">
+            <label for="address">Адрес:</label>
+            <input type="text" id="address" name="address">
+        </div>
+        <div class="form-group" id="postamat_number_group" style="display: none;">
+            <label for="postamat_number">Номер почтомата:</label>
+            <input type="text" id="postamat_number" name="postamat_number">
+        </div>
+        <button type="submit" class="checkout-button">Заказать</button>
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+document.getElementById('delivery_service').addEventListener('change', function() {
+    const service = this.value;
+    const deliveryTypeGroup = document.getElementById('delivery_type_group');
+    const branchNumberGroup = document.getElementById('branch_number_group');
+    const postalIndexGroup = document.getElementById('postal_index_group');
+    const storeNumberGroup = document.getElementById('store_number_group');
+    const addressGroup = document.getElementById('address_group');
+    const postamatNumberGroup = document.getElementById('postamat_number_group');
+
+    deliveryTypeGroup.style.display = 'none';
+    branchNumberGroup.style.display = 'none';
+    postalIndexGroup.style.display = 'none';
+    storeNumberGroup.style.display = 'none';
+    addressGroup.style.display = 'none';
+    postamatNumberGroup.style.display = 'none';
+
+    if (service === 'novaposhta' || service === 'ukrposhta' || service === 'meest') {
+        deliveryTypeGroup.style.display = 'block';
+        document.getElementById('delivery_type').addEventListener('change', function() {
+            const type = this.value;
+            branchNumberGroup.style.display = (type === 'branch') ? 'block' : 'none';
+            postalIndexGroup.style.display = (service === 'ukrposhta') ? 'block' : 'none';
+            addressGroup.style.display = (type === 'courier') ? 'block' : 'none';
+            postamatNumberGroup.style.display = (type === 'postamat') ? 'block' : 'none';
+        });
+    } else if (service === 'instore') {
+        storeNumberGroup.style.display = 'block';
+    }
+});
+</script>
+{% endblock %}

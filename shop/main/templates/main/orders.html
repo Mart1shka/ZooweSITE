@@ -1,0 +1,50 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/orders.css' %}">
+{% endblock %}
+{% block content %}
+<section class="orders-section">
+    <h2>Заказы</h2>
+    {% if orders %}
+        {% for order in orders %}
+        <div class="order-item">
+            <p class="order-number">
+                <strong>Уникальный номер заказа:</strong>
+                <span id="order-number-{{ order.id }}">{{ order.order_number }}</span>
+                <button class="btn-copy" onclick="copyToClipboard('{{ order.id }}')">Копировать</button>
+            </p>
+            <p><strong>Имя:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+            <p><strong>Почта:</strong> {{ order.email }}</p>
+            <p><strong>Адрес доставки:</strong> {{ order.address }}</p>
+            <p><strong>Поштомат/Відділення:</strong> {{ order.branch_number }}</p>
+            <p><strong>Поштовий індекс:</strong> {{ order.postal_index }}</p>
+            <form method="post" action="{% url 'update_order_paid' order.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-paid">Обновить до "Оплачен"</button>
+            </form>
+            <form method="post" action="{% url 'update_order_shipped' order.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-shipped">Обновить до "Доставляется"</button>
+            </form>
+            <form method="post" action="{% url 'update_order_delivered' order.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-delivered">Обновить до "Доставлен"</button>
+            </form>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-orders">Нет заказов для отображения.</p>
+    {% endif %}
+</section>
+<script>
+function copyToClipboard(orderId) {
+    var copyText = document.getElementById('order-number-' + orderId).innerText;
+    navigator.clipboard.writeText(copyText).then(function() {
+        alert('Номер заказа скопирован: ' + copyText);
+    }, function(err) {
+        alert('Не удалось скопировать номер заказа');
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/cart.css' %}">
+{% endblock %}
+{% block content %}
+<div class="cart-section">
+    <h2>Корзина</h2>
+    {% if cart_items %}
+        {% for item in cart_items %}
+        <div class="cart-item">
+            <img src="{{ item.product.image1.url }}" alt="{{ item.product.name }}">
+            <div class="item-details">
+                <h3>{{ item.product.name }}</h3>
+                <p>{{ item.product.price }} {{ item.product.currency }}</p>
+                <form action="{% url 'update_quantity' item.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                    <button type="submit">Обновить количество</button>
+                </form>
+                <form action="{% url 'remove_from_cart' item.id %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="remove-item">Удалить</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="cart-summary">
+            <h3>Количество товаров: {{ total_quantity }}</h3>
+            <h3>Итоговая сумма: {{ total_price|floatformat:2 }} {{ cart_items.0.product.currency }}</h3>
+            <a href="{% url 'checkout' %}" class="checkout-button">Оформить заказ</a>
+        </div>
+    {% else %}
+        <p>Ваша корзина пуста</p>
+    {% endif %}
+</div>
+{% endblock %}

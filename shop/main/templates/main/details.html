@@ -1,0 +1,50 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/details.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="product-details">
+    <div class="product-main-image">
+        {% if product.image1 %}
+            <img id="main-image" src="{{ product.image1.url }}" alt="{{ product.name }}" class="main-image">
+        {% else %}
+            <img id="main-image" src="{% static 'main/images/no_image_available.png' %}" alt="No image available" class="main-image">
+        {% endif %}
+    </div>
+    <div class="product-thumbnails">
+        {% if product.image1 %}
+            <img src="{{ product.image1.url }}" alt="{{ product.name }}" class="thumbnail" onclick="changeImage('{{ product.image1.url }}')">
+        {% endif %}
+        {% if product.image2 %}
+            <img src="{{ product.image2.url }}" alt="{{ product.name }}" class="thumbnail" onclick="changeImage('{{ product.image2.url }}')">
+        {% endif %}
+        {% if product.image3 %}
+            <img src="{{ product.image3.url }}" alt="{{ product.name }}" class="thumbnail" onclick="changeImage('{{ product.image3.url }}')">
+        {% endif %}
+        {% if product.image4 %}
+            <img src="{{ product.image4.url }}" alt="{{ product.name }}" class="thumbnail" onclick="changeImage('{{ product.image4.url }}')">
+        {% endif %}
+        {% if product.image5 %}
+            <img src="{{ product.image5.url }}" alt="{{ product.name }}" class="thumbnail" onclick="changeImage('{{ product.image5.url }}')">
+        {% endif %}
+    </div>
+    <div class="product-info">
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <p>{{ product.price }} {{ product.currency }}</p>
+        <form action="{% url 'add_to_cart' product.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="product" value="{{ product.id }}">
+            <button type="submit" class="buy-button">Купить</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function changeImage(imageUrl) {
+        document.getElementById('main-image').src = imageUrl;
+    }
+</script>
+{% endblock %}

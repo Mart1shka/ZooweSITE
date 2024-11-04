@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    padding-left: 20px; /* Добавляем отступ слева */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.left-nav {
+    margin-right: auto;
+}
+
+.right-nav {
+    margin-left: auto;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #444;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+/* remove_from_cart.css */
+.delete-confirmation {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #fff;
+}
+
+.delete-confirmation h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.delete-confirmation p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.delete-confirmation button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.delete-confirmation button:hover {
+    background-color: #c82333;
+}
+
+.delete-confirmation a {
+    color: #007bff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.delete-confirmation a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+#log1 {
+    background-color: cornflowerblue;
+}
+
+#cart1 {
+    background-color: #28a745;
+}
+

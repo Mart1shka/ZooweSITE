@@ -1,0 +1,30 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="profile-section">
+    <h2>Profile</h2>
+    <div class="profile-info">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Surname and name:</strong> {{ user.last_name }} {{ user.first_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+        <form method="post" action="{% url 'prodavec' %}">
+            {% csrf_token %}
+            <button type="submit" class="profile-button">prodavec</button>
+        </form>
+        {% for order in orders %}
+        <div class="order-item">
+            <p>Заказ №{{ order.id }} на {{ order.product.name }}</p>
+            <a href="{% url 'track_order' order.id %}" class="profile-button">Отслеживать заказ</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
